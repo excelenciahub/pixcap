@@ -7,9 +7,9 @@
 ### Install typescript
 `npm install -g typescript`
 
-### build project
-`tsc index.ts`
+### Install dependencies
+`npm i`
 
 ### run project
-`node index.ts`
+`npm run start`
 

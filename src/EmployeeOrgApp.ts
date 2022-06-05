@@ -17,7 +17,7 @@ export class EmployeeOrgApp implements IEmployeeOrgApp {
      * @param supervisorID 
      */
     move(employeeID: number, supervisorID: number) {
-        this.past = [JSON.parse(JSON.stringify(this.ceo)), ...this.past];
+        this.past = [this.copyObject(this.ceo), ...this.past];
         this.future = [];
 
         this.ceo = this.removeEmployee(this.ceo, employeeID, supervisorID);
@@ -26,6 +26,14 @@ export class EmployeeOrgApp implements IEmployeeOrgApp {
             this.removedEmployeeObj = null;
         }
     }
+
+    copyObject(obj: any) {
+        let clone = Object.assign({}, obj);
+        Object.keys(clone).forEach(
+            key => (clone[key] = typeof obj[key] === 'object' ? this.copyObject(obj[key]) : obj[key])
+        );
+        return Array.isArray(obj) ? (clone.length = obj.length) ? Array.from(clone) : [] : clone;
+    };
 
     /**
      * Used to undo functionality
