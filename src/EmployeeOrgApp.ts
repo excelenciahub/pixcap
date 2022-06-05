@@ -28,7 +28,7 @@ export class EmployeeOrgApp implements IEmployeeOrgApp {
     }
 
     copyObject(obj: any) {
-        let clone = Object.assign({}, obj);
+        let clone = {...obj};
         Object.keys(clone).forEach(
             key => (clone[key] = typeof obj[key] === 'object' ? this.copyObject(obj[key]) : obj[key])
         );
